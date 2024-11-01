@@ -3,14 +3,14 @@
 #include <curl/curl.h>
 #include <fstream>
 
-// Function to handle the response data
+//handle the response data
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
     size_t totalSize = size * nmemb;
     output->append((char*)contents, totalSize);
     return totalSize;
 }
 
-// Function to send HTTP GET request
+//send HTTP GET request
 std::string sendRequest(const std::string& url) {
     CURL* curl;
     CURLcode res;
@@ -31,14 +31,14 @@ std::string sendRequest(const std::string& url) {
     return readBuffer;
 }
 
-// Function to crawl the application
+//crawl the application
 void crawlApplication(const std::string& baseUrl) {
     std::string response = sendRequest(baseUrl);
     std::cout << "Crawled: " << baseUrl << std::endl;
     // TODO: Parse the response to find links and forms
 }
 
-// Function to log vulnerabilities found
+//log vulnerabilities found
 void logVulnerability(const std::string& vulnerability, const std::string& url) {
     std::ofstream logFile("vulnerabilities.log", std::ios::app);
     if (logFile.is_open()) {
